@@ -7,102 +7,94 @@
 #include "./libs/dorm.h"
 #include "./libs/student.h"
 #include "./libs/gender.h"
-#include <stdbool.h>
+
+#define MAX_INPUT_LENGTH 75
+
+void process_input(char *input, struct dorm_t *drm, int *zdrm, struct student_t *mhs, int *zstd);
 
 int main(int _argc, char **_argv)
 {
-  char input[75];
-  int zdrm = 0;
-  int size = 0;
-  struct dorm_t *drm = malloc(size * sizeof(struct dorm_t));
-  int zstd = 0;
-  int sizee = 0;
-  struct student_t *mhs = malloc(sizee * sizeof(struct student_t));
-  char *token;
-  bool running = true;
+    char input[MAX_INPUT_LENGTH];
+    int zdrm = 0;
+    int zstd = 0;
+    struct dorm_t *drm = malloc(sizeof(struct dorm_t) * 1);
+    struct student_t *mhs = malloc(sizeof(struct student_t) * 1);
 
-  while (running)
-  {
-    fgets(input, sizeof input, stdin);
     while (1)
     {
-      if (input[strlen(input) - 1] == '\n' || input[strlen(input) - 1]== '\r')
-      {
-        input[strlen(input) - 1] = '\0';
-      }
-      else
-      {
-        break;
-      }
+        fgets(input, sizeof(input), stdin);
+        if (strcmp(input, "---\n") == 0)
+        {
+            break;
+        }
+        process_input(input, drm, &zdrm, mhs, &zstd);
     }
 
-    token = strtok(input, "#");
-    if (strcmp(token, "---") == 0)
+    free(drm);
+    free(mhs);
+
+    return 0;
+}
+
+void process_input(char *input, struct dorm_t *drm, int *zdrm, struct student_t *mhs, int *zstd)
+{
+    char *token = strtok(input, "#");
+
+    if (strcmp(token, "dorm-add") == 0)
     {
-      running = false;
-    }
-    else if (strcmp(token, "dorm-add") == 0)
-    {
-      size++;
-      drm = realloc(drm, size * sizeof(struct dorm_t));
-      drm[zdrm] = create_dorm(input);
-      zdrm++;
+        (*zdrm)++;
+        drm = realloc(drm, sizeof(struct dorm_t) * (*zdrm));
+        drm[*zdrm - 1] = create_dorm(input);
     }
     else if (strcmp(token, "dorm-print-all") == 0)
     {
-      for (int m = 0; m < zdrm; m++)
-      {
-        print_dorm(drm[m]);
-      }
+        for (int i = 0; i < *zdrm; i++)
+        {
+            print_dorm(drm[i]);
+        }
     }
     else if (strcmp(token, "dorm-print-all-detail") == 0)
     {
-      for (int m = 0; m < zdrm; m++)
-      {
-        print_dorm_detail(drm[m]);
-      }
+        for (int i = 0; i < *zdrm; i++)
+        {
+            print_dorm_detail(drm[i]);
+        }
     }
     else if (strcmp(token, "student-add") == 0)
     {
-      sizee++;
-      mhs = realloc(mhs, sizee * sizeof(struct student_t));
-      mhs[zstd] = create_student(input);
-      zstd++;
+        (*zstd)++;
+        mhs = realloc(mhs, sizeof(struct student_t) * (*zstd));
+        mhs[*zstd - 1] = create_student(input);
     }
     else if (strcmp(token, "student-print-all") == 0)
     {
-      for (int m = 0; m < zstd; m++)
-      {
-        print_student(mhs[m]);
-      }
+        for (int i = 0; i < *zstd; i++)
+        {
+            print_student(mhs[i]);
+        }
     }
     else if (strcmp(token, "student-print-all-detail") == 0)
     {
-      for (int m = 0; m < zstd; m++)
-      {
-        print_student_detail(mhs[m]);
-      }
+        for (int i = 0; i < *zstd; i++)
+        {
+            print_student_detail(mhs[i]);
+        }
     }
     else if (strcmp(token, "assign-student") == 0)
     {
-      char *nim = strtok(NULL, "#");
-      char *asrama = strtok(NULL, "#");
-      assign_student(drm, mhs, nim, asrama, zstd, zdrm, find_id, find_dorm);
+        char *nim = strtok(NULL, "#");
+        char *asrama = strtok(NULL, "#");
+        assign_student(drm, mhs, nim, asrama, *zstd, *zdrm, find_id, find_dorm);
     }
     else if (strcmp(token, "move-student") == 0)
     {
-      char *nim = strtok(NULL, "#");
-      char *asrama = strtok(NULL, "#");
-      move_student(drm, mhs, nim, asrama, zstd, zdrm, find_id, find_dorm);
+        char *nim = strtok(NULL, "#");
+        char *asrama = strtok(NULL, "#");
+        move_student(drm, mhs, nim, asrama, *zstd, *zdrm, find_id, find_dorm);
     }
     else if (strcmp(token, "dorm-empty") == 0)
     {
-      char *asrama = strtok(NULL, "#");
-      dorm_empty(asrama, zstd, zdrm, mhs, drm, find_dorm);
+        char *asrama = strtok(NULL, "#");
+        dorm_empty(asrama, *zstd, *zdrm, mhs, drm, find_dorm);
     }
-  }
-  free(mhs);
-  free(drm);
-
-  return 0;
 }
