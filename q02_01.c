@@ -1,5 +1,5 @@
-// 12S23030 - SimorangkirJonathan
-// 12S23045 - Chyntia Reginauli rajaguguk
+// 12S23030 - Simoragkir Jonathan
+// 12S23045 - Chintya Rajagukguk
 
 #include <stdio.h>
 #include <string.h>
