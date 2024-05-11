@@ -11,7 +11,7 @@ int main(int _argc, char **_argv){
     struct dorm_t *dorms = malloc(100 * sizeof(struct dorm_t));
     struct student_t *students = malloc(100 * sizeof(struct student_t));
     char input[100];
-    char id[12];jhgjhg
+    char id[12];
     char student_name[40];
     char year[5];
     char dorm_name[40];
