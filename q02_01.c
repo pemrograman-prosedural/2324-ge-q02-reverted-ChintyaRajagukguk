@@ -7,6 +7,7 @@
 #include "./libs/dorm.h"
 #include "./libs/student.h"
 #include "./libs/gender.h"
+#include <stdbool.h>
 
 int main(int _argc, char **_argv)
 {
@@ -18,8 +19,9 @@ int main(int _argc, char **_argv)
   int sizee = 0;
   struct student_t *mhs = malloc(sizee * sizeof(struct student_t));
   char *token;
+  bool running = true; // Variable to control the loop
 
-  while (1)
+  while (running) // Use the boolean variable for controlling the loop
   {
     fgets(input, sizeof input, stdin);
     while (1)
@@ -37,7 +39,7 @@ int main(int _argc, char **_argv)
     token = strtok(input, "#");
     if (strcmp(token, "---") == 0)
     {
-      break;
+      running = false; // Terminate the loop
     }
     else if (strcmp(token, "dorm-add") == 0)
     {
