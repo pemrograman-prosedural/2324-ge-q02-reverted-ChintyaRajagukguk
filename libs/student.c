@@ -16,12 +16,12 @@ struct student_t create_student(char *input)
   strcpy(std.id, strtok(NULL, "#"));
   strcpy(std.name, strtok(NULL, "#"));
   strcpy(std.year, strtok(NULL, "#"));
-  char *yoru = strtok(NULL, "#");
-  if (strcmp(yoru, "male") == 0)
+  char *gnd = strtok(NULL, "#");
+  if (strcmp(gnd, "male") == 0)
   {
     std.gender = GENDER_MALE;
   }
-  else if (strcmp(yoru, "female") == 0)
+  else if (strcmp(gnd, "female") == 0)
   {
     std.gender = GENDER_FEMALE;
   }

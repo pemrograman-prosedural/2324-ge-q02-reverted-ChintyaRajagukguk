@@ -14,12 +14,12 @@ struct dorm_t create_dorm(char *input)
   struct dorm_t drm;
   strcpy(drm.name, strtok(NULL, "#"));
   drm.capacity = atoi(strtok(NULL, "#"));
-  char *yoru = strtok(NULL, "#");
-  if (strcmp(yoru, "male") == 0)
+  char *gnd = strtok(NULL, "#");
+  if (strcmp(gnd, "male") == 0)
   {
     drm.gender = GENDER_MALE;
   }
-  else if (strcmp(yoru, "female") == 0)
+  else if (strcmp(gnd, "female") == 0)
   {
     drm.gender = GENDER_FEMALE;
   }
