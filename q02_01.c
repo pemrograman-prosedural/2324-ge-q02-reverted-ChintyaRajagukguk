@@ -10,6 +10,12 @@
 
 #define MAX_INPUT_LENGTH 75
 
+void trim_newline(char *str);
+void print_all_dorms(struct dorm_t *dorms, int count);
+void print_all_dorms_detail(struct dorm_t *dorms, int count);
+void print_all_students(struct student_t *students, int count);
+void print_all_students_detail(struct student_t *students, int count);
+
 int main(int argc, char **argv)
 {
     char input[MAX_INPUT_LENGTH];
@@ -32,8 +38,14 @@ int main(int argc, char **argv)
         else if (strcmp(token, "dorm-add") == 0)
         {
             dorm_count++;
-            dorms = realloc(dorms, dorm_count * sizeof(struct dorm_t));
-            dorms[dorm_count - 1] = create_dorm(input);
+            struct dorm_t *temp = realloc(dorms, dorm_count * sizeof(struct dorm_t));
+            if (temp != NULL) {
+                dorms = temp;
+                dorms[dorm_count - 1] = create_dorm(input);
+            } else {
+                printf("Error: Memory reallocation failed.\n");
+                break; // Exit loop if memory allocation fails
+            }
         }
         else if (strcmp(token, "dorm-print-all") == 0)
         {
@@ -46,8 +58,14 @@ int main(int argc, char **argv)
         else if (strcmp(token, "student-add") == 0)
         {
             student_count++;
-            students = realloc(students, student_count * sizeof(struct student_t));
-            students[student_count - 1] = create_student(input);
+            struct student_t *temp = realloc(students, student_count * sizeof(struct student_t));
+            if (temp != NULL) {
+                students = temp;
+                students[student_count - 1] = create_student(input);
+            } else {
+                printf("Error: Memory reallocation failed.\n");
+                break; // Exit loop if memory allocation fails
+            }
         }
         else if (strcmp(token, "student-print-all") == 0)
         {
@@ -87,6 +105,7 @@ void trim_newline(char *str)
     while (*str != '\0' && (*str == '\n' || *str == '\r'))
     {
         *str = '\0';
+        str++;
     }
 }
 
