@@ -18,11 +18,8 @@ struct dorm_t
 };
 
 struct dorm_t create_dorm(char *input);
-
 void print_dorm(struct dorm_t drm);
-
 void print_dorm_detail(struct dorm_t drm);
-
 int find_dorm(char *asrama, int zdrm, struct dorm_t *drm);
 
 #endif

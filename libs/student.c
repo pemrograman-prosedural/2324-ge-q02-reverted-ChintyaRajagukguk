@@ -12,34 +12,34 @@
 
 struct student_t create_student(char *input)
 {
-  struct student_t mhs;
-  strcpy(mhs.id, strtok(NULL, "#"));
-  strcpy(mhs.name, strtok(NULL, "#"));
-  strcpy(mhs.year, strtok(NULL, "#"));
+  struct student_t std;
+  strcpy(std.id, strtok(NULL, "#"));
+  strcpy(std.name, strtok(NULL, "#"));
+  strcpy(std.year, strtok(NULL, "#"));
   char *yoru = strtok(NULL, "#");
   if (strcmp(yoru, "male") == 0)
   {
-    mhs.gender = GENDER_MALE;
+    std.gender = GENDER_MALE;
   }
   else if (strcmp(yoru, "female") == 0)
   {
-    mhs.gender = GENDER_FEMALE;
+    std.gender = GENDER_FEMALE;
   }
-  mhs.dorm = NULL;
-  mhs.dorm = malloc(1 * sizeof(struct dorm_t));
-  strcpy(mhs.dorm->name, "unassigned");
+  std.dorm = NULL;
+  std.dorm = malloc(1 * sizeof(struct dorm_t));
+  strcpy(std.dorm->name, "unassigned");
 
-  return mhs;
+  return std;
 }
 
-void print_student(struct student_t mhs)
+void print_student(struct student_t std)
 {
-  printf("%s|%s|%s|", mhs.id, mhs.name, mhs.year);
-  if (mhs.gender == GENDER_MALE)
+  printf("%s|%s|%s|", std.id, std.name, std.year);
+  if (std.gender == GENDER_MALE)
   {
     printf("male\n");
   }
-  else if (mhs.gender == GENDER_FEMALE)
+  else if (std.gender == GENDER_FEMALE)
   {
     printf("female\n");
   }
