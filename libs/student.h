@@ -18,5 +18,5 @@ void print_student(struct student_t *_student, int count);
 void print_student_detail(struct student_t *_student, int count);
 void assign_student(struct student_t *_student, struct dorm_t *_dorm, char *id, char *dorm_name);
 void move_student(struct student_t *_student, struct dorm_t *_dorm, struct dorm_t *old_dorm, char *id, char *dorm_name);
-void unassign_student(struct student_t *_student, struct dorm_t *_dorm);
+void dorm_empty(struct student_t *students, struct dorm_t *dorms, int std);
 #endif

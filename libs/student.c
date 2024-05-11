@@ -58,7 +58,13 @@ void move_student(struct student_t *_student, struct dorm_t *_dorm, struct dorm_
         }
     }
 }
-void unassign_student(struct student_t *_student, struct dorm_t *_dorm){
-    _student->dorm = NULL;
-    _dorm->residents_num--;
+void dorm_empty(struct student_t *students, struct dorm_t *dorms, int stdnt){
+    for (int i = 0; i < stdnt; i++){
+        if (students[i].dorm==NULL){
+            continue;
+        } else if(strcmp(students[i].dorm->name, dorms->name)==0){
+            students[i].dorm = NULL;
+        }
+    }
+    dorms->residents_num = 0;
 }
